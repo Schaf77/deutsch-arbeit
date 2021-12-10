@@ -1,9 +1,36 @@
 # Erstellen aller Listen und erste Konfiguration
+from tkinter import *
+
+
 taetigkeiten_dev = ['pflegen, helfen, erziehen', 'Häuser, Brüken oder Fabriken entwerfen oder bauen',
+                    'kalkulieren und rechnen', 'Maschinen steuern und bedienen', 'bedienen, verkaufen, werben',
+                    'montieren, reparieren', 'mit Kindern oder Jugendlichen zu tun haben']
+taetigkeiten = ['pflegen, helfen, erziehen', 'Häuser, Brüken oder Fabriken entwerfen oder bauen',
                 'kalkulieren und rechnen', 'Maschinen steuern und bedienen', 'bedienen, verkaufen, werben',
-                'montieren, reparieren', 'mit Kindern oder Jugendlichen zu tun haben']
-taetigkeiten = ['pflegen, helfen, erziehen', 'Häuser, Brüken oder Fabriken entwerfen oder bauen', 'kalkulieren und rechnen', 'Maschinen steuern und bedienen', 'bedienen, verkaufen, werben', 'montieren, reparieren', 'mit Kindern oder Jugendlichen zu tun haben', 'hauptsächlich entwerfen, gestalten, zeichnen', 'programmieren, EDV Systeme einrichten / verwalten', 'mit Material (Holz, Metall, Glas, Stein, ...) umgehen', 'zubereiten, kochen', 'zeichnen, gestalten, fotographieren', 'mit anderen Menschen in einer Fremdsprache reden', 'mit Literatur, Kultur, Medien umgehen', 'mich mit fremden Völkern, Kulturen... beschäftigen', 'messen, prüfen, untersuchen', 'eine medizinische Tätigkeit ausüben', 'in der Landwirtschaft oder im Gartenbau arbeiten', 'Texte verfassen', 'viel planen und organisieren', 'tanzen, musizieren, Theater spielen', 'menschliches Verhalten erforschen', 'anderen etwas beibringen können; unterrichten', 'mich mit politischen oder gesellschaftlichen Themen beschäftigen', 'sichern, schützen', 'mich mit philisophisch-theologischen Fragen beschäftigen', 'in Rechts- oder Steuerfragen beraten', 'Sport treiben können']
-arbeitsbedingungen = ['ein hohes Ansehen haben', 'eigenverantwortlich arbeiten', 'für mich alleine arbeiten', 'geregelte Arbeitszeit haben', 'viel unterwegs sein', 'mich selbstständig machen könnnen', 'gute Aufstiegsmöglichkeiten haben', 'mit anderen in der Gruppe zusammenarbeiten', 'im Ausland arbeiten können', 'im Freien arbeiten', 'viel Freizeit haben', 'einen sicheren Arbeitsplatz haben', 'Karriere machen', 'keine körperliche Belastung durch Lärm etc. haben', 'wenig Stress haben', 'in einem Büro arbeiten', 'im Sitzen arbeiten', 'überwiegend im Stehen arbeiten', 'andere Menschen führen', 'überwiegend mit dem Köpf arbeiten', 'überwiegend mit den Händen arbeiten', 'dass das Betriebsklima stimmt', 'ständig neues dazu lernen', 'mich engagieren und etwas voranbringen', 'dass meine Aufgaben klar strukturiert sind', 'einen kurzen Weg zu meiner Arbeitsstelle haben', 'viel selbst entscheiden können']
+                'montieren, reparieren', 'mit Kindern oder Jugendlichen zu tun haben',
+                'hauptsächlich entwerfen, gestalten, zeichnen', 'programmieren, EDV Systeme einrichten / verwalten',
+                'mit Material (Holz, Metall, Glas, Stein, ...) umgehen', 'zubereiten, kochen',
+                'zeichnen, gestalten, fotographieren', 'mit anderen Menschen in einer Fremdsprache reden',
+                'mit Literatur, Kultur, Medien umgehen', 'mich mit fremden Völkern, Kulturen... beschäftigen',
+                'messen, prüfen, untersuchen', 'eine medizinische Tätigkeit ausüben',
+                'in der Landwirtschaft oder im Gartenbau arbeiten', 'Texte verfassen', 'viel planen und organisieren',
+                'tanzen, musizieren, Theater spielen', 'menschliches Verhalten erforschen',
+                'anderen etwas beibringen können; unterrichten',
+                'mich mit politischen oder gesellschaftlichen Themen beschäftigen', 'sichern, schützen',
+                'mich mit philisophisch-theologischen Fragen beschäftigen', 'in Rechts- oder Steuerfragen beraten',
+                'Sport treiben können']
+arbeitsbedingungen = ['ein hohes Ansehen haben', 'eigenverantwortlich arbeiten', 'für mich alleine arbeiten',
+                      'geregelte Arbeitszeit haben', 'viel unterwegs sein', 'mich selbstständig machen könnnen',
+                      'gute Aufstiegsmöglichkeiten haben', 'mit anderen in der Gruppe zusammenarbeiten',
+                      'im Ausland arbeiten können', 'im Freien arbeiten', 'viel Freizeit haben',
+                      'einen sicheren Arbeitsplatz haben', 'Karriere machen',
+                      'keine körperliche Belastung durch Lärm etc. haben', 'wenig Stress haben',
+                      'in einem Büro arbeiten', 'im Sitzen arbeiten', 'überwiegend im Stehen arbeiten',
+                      'andere Menschen führen', 'überwiegend mit dem Köpf arbeiten',
+                      'überwiegend mit den Händen arbeiten', 'dass das Betriebsklima stimmt',
+                      'ständig neues dazu lernen', 'mich engagieren und etwas voranbringen',
+                      'dass meine Aufgaben klar strukturiert sind', 'einen kurzen Weg zu meiner Arbeitsstelle haben',
+                      'viel selbst entscheiden können']
 question_list_1 = []
 question_list_2 = []
 already_asked = []
@@ -11,6 +38,8 @@ answers_dict = {}
 counter = 1
 choose_prompt = None
 working_list = None
+root = Tk()
+root.title('Studien- und Berufsorientierungsprogramm')
 
 def reset_load(load_list):
     global choose_prompt
@@ -26,6 +55,7 @@ def reset_load(load_list):
         choose_prompt = 'In meinem Künftigen Beruf möchte ich...'
     else:
         choose_prompt = 'Something went wrong here :('
+
 
 # Funktion, die prüft, ob Fragen schonmal gestellt worden sind oder ob nach der selben Sache gefragt wird und ggf. abfragt und Ergebnisse in answers_dict einfügt
 def main_choose():
@@ -73,6 +103,23 @@ def analyse_output():
         f.close()
 
 
-reset_load(taetigkeiten)
-main_choose()
-analyse_output()
+def home():
+    window_clear()
+    Label(root, text='Studien- und Berufsorientierungsprogramm', font='Helvetica 18 bold').grid(row=0, column=3, columnspan=3)
+    Label(root, text='Matrizen:', font='Helvetica 16').grid(row=1, column=3, columnspan=2)
+    Button(root, text='Tätigkeiten', font='Helvetica 16').grid(row=2, column=3, ipadx=40)
+    Button(root, text='Arbeitsbedingungen', font='Helvetica 16').grid(row=2, column=4)
+
+
+def window_clear():
+    for widget in root.winfo_children():
+        widget.destroy()
+
+
+
+home()
+root.mainloop()
+
+# reset_load(taetigkeiten)
+# main_choose()
+# analyse_output()
