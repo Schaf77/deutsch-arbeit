@@ -9,46 +9,70 @@ question_list_2 = []
 already_asked = []
 answers_dict = {}
 counter = 1
-question_list_1.extend(taetigkeiten)
-question_list_2 = question_list_1
-choose_prompt = 'In meinem künftigen Beruf möchte ich'
+choose_prompt = None
+working_list = None
 
-# Code, der prüft, ob Fragen schonmal gestellt worden sind oder ob nach der selben Sache gefragt wird und ggf. abfragt und Ergebnisse in answers_dict einfügt
-for question_2 in question_list_1:
-    for question_1 in question_list_2:
-        if question_1 + question_2 not in already_asked and question_1 != question_2:
-            done = False
-            while not done:
-                # print(f'question 1: {question_1}\nquestion 2: {question_2}')
-                antwort = input(f'{choose_prompt}...\n{question_1}\noder\n{question_2}\n:')
-                if antwort == '1':
-                    answers_dict[f'{question_2} & {question_1}'] = int(question_list_1.index(question_1)) + 1
-                    done = True
-                    already_asked.append(question_list_1.index(question_1) + question_list_1.index(question_2))
-                elif antwort == '2':
-                    answers_dict[f'{question_2} & {question_1}'] = int(question_list_1.index(question_2)) + 1
-                    done = True
-                    already_asked.append(question_list_1.index(question_1) + question_list_1.index(question_2))
-                else:
-                    print('Bitte mit 1 oder 2 antworten!')
-        else:
-            break
+def reset_load(load_list):
+    global choose_prompt
+    global question_list_1
+    global question_list_2
+    global working_list
+    question_list_1.extend(load_list)
+    working_list = load_list
+    question_list_2 = question_list_1
+    if load_list == taetigkeiten:
+        choose_prompt = 'In meinem künftigen Beruf möchte ich...'
+    elif load_list == arbeitsbedingungen:
+        choose_prompt = 'In meinem Künftigen Beruf möchte ich...'
+    else:
+        choose_prompt = 'Something went wrong here :('
 
-# Erstellung von Listen, die zur Analyse und zur Ausgabe benötigt werden
-analyse_list = list(answers_dict.values())
-out_list = []
-out_dict = {}
+# Funktion, die prüft, ob Fragen schonmal gestellt worden sind oder ob nach der selben Sache gefragt wird und ggf. abfragt und Ergebnisse in answers_dict einfügt
+def main_choose():
+    for question_2 in question_list_1:
+        for question_1 in question_list_2:
+            if question_1 + question_2 not in already_asked and question_1 != question_2:
+                done = False
+                while not done:
+                    # print(f'question 1: {question_1}\nquestion 2: {question_2}')
+                    antwort = input(f'{choose_prompt}...\n{question_1}\noder\n{question_2}\n:')
+                    if antwort == '1':
+                        answers_dict[f'{question_2} & {question_1}'] = int(question_list_1.index(question_1)) + 1
+                        done = True
+                        already_asked.append(question_list_1.index(question_1) + question_list_1.index(question_2))
+                    elif antwort == '2':
+                        answers_dict[f'{question_2} & {question_1}'] = int(question_list_1.index(question_2)) + 1
+                        done = True
+                        already_asked.append(question_list_1.index(question_1) + question_list_1.index(question_2))
+                    else:
+                        print('Bitte mit 1 oder 2 antworten!')
+            else:
+                break
 
-# Analyse und Sortierung der Ergebnisse
-while counter <= len(taetigkeiten) - 1:
-    pos = [i for i in range(len(analyse_list)) if analyse_list[i] == counter]
-    out_dict[counter] = len(pos)
-    counter += 1
 
-for k, v in dict.items(out_dict):
-    out_list.append(f'{k} {v}')
+def analyse_output():
+    global counter
+    global working_list
+    # Erstellung von Listen, die zur Analyse und zur Ausgabe benötigt werden
+    analyse_list = list(answers_dict.values())
+    out_list = []
+    out_dict = {}
 
-with open('out.txt', 'w', encoding='UTF-8') as f:
-    for element in out_list:
-        f.write(str(element) + "\n")
-    f.close()
+    # Analyse und Sortierung der Ergebnisse
+    while counter <= len(working_list) - 1:
+        pos = [i for i in range(len(analyse_list)) if analyse_list[i] == counter]
+        out_dict[counter] = len(pos)
+        counter += 1
+
+    for k, v in dict.items(out_dict):
+        out_list.append(f'{k} {v}')
+
+    with open('out.txt', 'w', encoding='UTF-8') as f:
+        for element in out_list:
+            f.write(str(element) + "\n")
+        f.close()
+
+
+reset_load(taetigkeiten)
+main_choose()
+analyse_output()
