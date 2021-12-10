@@ -1,7 +1,8 @@
 # Erstellen aller Listen und erste Konfiguration
-taetigkeiten = ['pflegen, helfen, erziehen', 'Häuser, Brüken oder Fabriken entwerfen oder bauen',
+taetigkeiten_dev = ['pflegen, helfen, erziehen', 'Häuser, Brüken oder Fabriken entwerfen oder bauen',
                 'kalkulieren und rechnen', 'Maschinen steuern und bedienen', 'bedienen, verkaufen, werben',
                 'montieren, reparieren', 'mit Kindern oder Jugendlichen zu tun haben']
+taetigkeiten = ['pflegen, helfen, erziehen', 'Häuser, Brüken oder Fabriken entwerfen oder bauen', 'kalkulieren und rechnen', 'Maschinen steuern und bedienen', 'bedienen, verkaufen, werben', 'montieren, reparieren', 'mit Kindern oder Jugendlichen zu tun haben', 'hauptsächlich entwerfen, gestalten, zeichnen', 'programmieren, EDV Systeme einrichten / verwalten', 'mit Material (Holz, Metall, Glas, Stein, ...) umgehen', 'zubereiten, kochen', 'zeichnen, gestalten, fotographieren', 'mit anderen Menschen in einer Fremdsprache reden', 'mit Literatur, Kultur, Medien umgehen', 'mich mit fremden Völkern, Kulturen... beschäftigen', 'messen, prüfen, untersuchen', 'eine medizinische Tätigkeit ausüben', 'in der Landwirtschaft oder im Gartenbau arbeiten', 'Texte verfassen', 'viel planen und organisieren', 'tanzen, musizieren, Theater spielen', 'menschliches Verhalten erforschen', 'anderen etwas beibringen können; unterrichten', 'mich mit politischen oder gesellschaftlichen Themen beschäftigen', 'sichern, schützen', 'mich mit philisophisch-theologischen Fragen beschäftigen', 'in Rechts- oder Steuerfragen beraten', 'Sport treiben können']
 question_list_1 = []
 question_list_2 = []
 already_asked = []
