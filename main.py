@@ -1,7 +1,6 @@
 # Erstellen aller Listen und erste Konfiguration
 from tkinter import *
 
-
 taetigkeiten_dev = ['pflegen, helfen, erziehen', 'Häuser, Brüken oder Fabriken entwerfen oder bauen',
                     'kalkulieren und rechnen', 'Maschinen steuern und bedienen', 'bedienen, verkaufen, werben',
                     'montieren, reparieren', 'mit Kindern oder Jugendlichen zu tun haben']
@@ -38,8 +37,10 @@ answers_dict = {}
 counter = 1
 choose_prompt = None
 working_list = None
+antwort = None
 root = Tk()
 root.title('Studien- und Berufsorientierungsprogramm')
+
 
 def reset_load(load_list):
     global choose_prompt
@@ -105,9 +106,10 @@ def analyse_output():
 
 def home():
     window_clear()
-    Label(root, text='Studien- und Berufsorientierungsprogramm', font='Helvetica 18 bold').grid(row=0, column=3, columnspan=3)
+    Label(root, text='Studien- und Berufsorientierungsprogramm', font='Helvetica 18 bold').grid(row=0, column=3,
+                                                                                                columnspan=3)
     Label(root, text='Matrizen:', font='Helvetica 16').grid(row=1, column=3, columnspan=2)
-    Button(root, text='Tätigkeiten', font='Helvetica 16').grid(row=2, column=3, ipadx=40)
+    Button(root, text='Tätigkeiten', font='Helvetica 16', command=taetigkeiten).grid(row=2, column=3, ipadx=40)
     Button(root, text='Arbeitsbedingungen', font='Helvetica 16').grid(row=2, column=4)
 
 
@@ -115,6 +117,40 @@ def window_clear():
     for widget in root.winfo_children():
         widget.destroy()
 
+
+def taetigkeiten():
+    window_clear()
+    global antwort
+
+    def set_antwort(answer):
+        global antwort
+        antwort = answer
+
+    Label(root, text='Tätigkeiten', font='Helvetica 18 bold').grid(row=0, column=0)
+    Label(root, text='In meinem künftigen Beruf möchte ich...', font='Helvetica 16').grid(row=1, column=0)
+    button1 = Button(root, text='Big Chungus', font='Helvetica 16', command=lambda: set_antwort(1))
+    button1.grid(row=2, column=0)
+    Label(root, text='oder', font='Helvetica 16').grid(row=3, column=0)
+    button2 = Button(root, text='fortnite balls', font='Helvetica 16', command=lambda: set_antwort(2))
+    button2.grid(row=4, column=0)
+    reset_load(taetigkeiten_dev)
+    for question_2 in question_list_1:
+        for question_1 in question_list_2:
+            if question_1 + question_2 not in already_asked and question_1 != question_2:
+                done = False
+                while not done:
+                    button1["text"] = 'question_1'
+                    button2["text"] = question_2
+                    if antwort == '1':
+                        answers_dict[f'{question_2} & {question_1}'] = int(question_list_1.index(question_1)) + 1
+                        done = True
+                        already_asked.append(question_list_1.index(question_1) + question_list_1.index(question_2))
+                    elif antwort == '2':
+                        answers_dict[f'{question_2} & {question_1}'] = int(question_list_1.index(question_2)) + 1
+                        done = True
+                        already_asked.append(question_list_1.index(question_1) + question_list_1.index(question_2))
+            else:
+                break
 
 
 home()
