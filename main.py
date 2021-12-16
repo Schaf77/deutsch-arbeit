@@ -1,7 +1,4 @@
 # Erstellen aller Listen und erste Konfiguration
-from tkinter import *
-
-
 taetigkeiten_dev = ['pflegen, helfen, erziehen', 'Häuser, Brüken oder Fabriken entwerfen oder bauen',
                     'kalkulieren und rechnen', 'Maschinen steuern und bedienen', 'bedienen, verkaufen, werben',
                     'montieren, reparieren', 'mit Kindern oder Jugendlichen zu tun haben']
@@ -38,8 +35,6 @@ answers_dict = {}
 counter = 1
 choose_prompt = None
 working_list = None
-root = Tk()
-root.title('Studien- und Berufsorientierungsprogramm')
 
 def reset_load(load_list):
     global choose_prompt
@@ -102,23 +97,6 @@ def analyse_output():
             f.write(str(element) + "\n")
         f.close()
 
-
-def home():
-    window_clear()
-    Label(root, text='Studien- und Berufsorientierungsprogramm', font='Helvetica 18 bold').grid(row=0, column=3, columnspan=3)
-    Label(root, text='Matrizen:', font='Helvetica 16').grid(row=1, column=3, columnspan=2)
-    Button(root, text='Tätigkeiten', font='Helvetica 16').grid(row=2, column=3, ipadx=40)
-    Button(root, text='Arbeitsbedingungen', font='Helvetica 16').grid(row=2, column=4)
-
-
-def window_clear():
-    for widget in root.winfo_children():
-        widget.destroy()
-
-
-
-home()
-root.mainloop()
 
 # reset_load(taetigkeiten)
 # main_choose()
